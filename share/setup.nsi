@@ -1,4 +1,4 @@
-Name "Almex Core (-bit)"
+Name "KALMEX Core (-bit)"
 
 RequestExecutionLevel highest
 SetCompressor /SOLID lzma
@@ -6,23 +6,23 @@ SetCompressor /SOLID lzma
 # General Symbol Definitions
 !define REGKEY "SOFTWARE\$(^Name)"
 !define VERSION 2.0.0
-!define COMPANY "Almex Core project"
-!define URL http://bit.almexs/
+!define COMPANY "KALMEX Core project"
+!define URL http://bit.KALMEXs/
 
 # MUI Symbol Definitions
-!define MUI_ICON "/root/ALMEX/share/pixmaps/bitcoin.ico"
-!define MUI_WELCOMEFINISHPAGE_BITMAP "/root/ALMEX/share/pixmaps/nsis-wizard.bmp"
+!define MUI_ICON "/root/KALMEX/share/pixmaps/bitcoin.ico"
+!define MUI_WELCOMEFINISHPAGE_BITMAP "/root/KALMEX/share/pixmaps/nsis-wizard.bmp"
 !define MUI_HEADERIMAGE
 !define MUI_HEADERIMAGE_RIGHT
-!define MUI_HEADERIMAGE_BITMAP "/root/ALMEX/share/pixmaps/nsis-header.bmp"
+!define MUI_HEADERIMAGE_BITMAP "/root/KALMEX/share/pixmaps/nsis-header.bmp"
 !define MUI_FINISHPAGE_NOAUTOCLOSE
 !define MUI_STARTMENUPAGE_REGISTRY_ROOT HKLM
 !define MUI_STARTMENUPAGE_REGISTRY_KEY ${REGKEY}
 !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME StartMenuGroup
-!define MUI_STARTMENUPAGE_DEFAULTFOLDER "Almex Core"
-!define MUI_FINISHPAGE_RUN $INSTDIR\almex-qt.exe
+!define MUI_STARTMENUPAGE_DEFAULTFOLDER "KALMEX Core"
+!define MUI_FINISHPAGE_RUN $INSTDIR\KALMEX-qt.exe
 !define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\modern-uninstall.ico"
-!define MUI_UNWELCOMEFINISHPAGE_BITMAP "/root/ALMEX/share/pixmaps/nsis-wizard.bmp"
+!define MUI_UNWELCOMEFINISHPAGE_BITMAP "/root/KALMEX/share/pixmaps/nsis-wizard.bmp"
 !define MUI_UNFINISHPAGE_NOAUTOCLOSE
 
 # Included files
@@ -48,18 +48,18 @@ Var StartMenuGroup
 !insertmacro MUI_LANGUAGE English
 
 # Installer attributes
-OutFile /root/ALMEX/almex-${VERSION}-win-setup.exe
+OutFile /root/KALMEX/KALMEX-${VERSION}-win-setup.exe
 !if "" == "64"
-InstallDir $PROGRAMFILES64\ALMEX
+InstallDir $PROGRAMFILES64\KALMEX
 !else
-InstallDir $PROGRAMFILES\ALMEX
+InstallDir $PROGRAMFILES\KALMEX
 !endif
 CRCCheck on
 XPStyle on
 BrandingText " "
 ShowInstDetails show
 VIProductVersion ${VERSION}.3
-VIAddVersionKey ProductName "Almex Core"
+VIAddVersionKey ProductName "KALMEX Core"
 VIAddVersionKey ProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "${COMPANY}"
 VIAddVersionKey CompanyWebsite "${URL}"
@@ -73,19 +73,19 @@ ShowUninstDetails show
 Section -Main SEC0000
     SetOutPath $INSTDIR
     SetOverwrite on
-    File /root/ALMEX/release/almex-qt.exe
-    File /oname=COPYING.txt /root/ALMEX/COPYING
-    File /oname=readme.txt /root/ALMEX/doc/README_windows.txt
+    File /root/KALMEX/release/KALMEX-qt.exe
+    File /oname=COPYING.txt /root/KALMEX/COPYING
+    File /oname=readme.txt /root/KALMEX/doc/README_windows.txt
     SetOutPath $INSTDIR\daemon
-    File /root/ALMEX/release/almexd.exe
-    File /root/ALMEX/release/almex-cli.exe
+    File /root/KALMEX/release/KALMEXd.exe
+    File /root/KALMEX/release/KALMEX-cli.exe
     SetOutPath $INSTDIR\doc
-    File /r /root/ALMEX/doc\*.*
+    File /r /root/KALMEX/doc\*.*
     SetOutPath $INSTDIR
     WriteRegStr HKCU "${REGKEY}\Components" Main 1
 
-    # Remove old wxwidgets-based-almex executable and locales:
-    Delete /REBOOTOK $INSTDIR\almex.exe
+    # Remove old wxwidgets-based-KALMEX executable and locales:
+    Delete /REBOOTOK $INSTDIR\KALMEX.exe
     RMDir /r /REBOOTOK $INSTDIR\locale
 SectionEnd
 
@@ -95,7 +95,7 @@ Section -post SEC0001
     WriteUninstaller $INSTDIR\uninstall.exe
     !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
     CreateDirectory $SMPROGRAMS\$StartMenuGroup
-    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\$(^Name).lnk" $INSTDIR\almex-qt.exe
+    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\$(^Name).lnk" $INSTDIR\KALMEX-qt.exe
     CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Uninstall $(^Name).lnk" $INSTDIR\uninstall.exe
     !insertmacro MUI_STARTMENU_WRITE_END
     WriteRegStr HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" DisplayName "$(^Name)"
@@ -106,10 +106,10 @@ Section -post SEC0001
     WriteRegStr HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" UninstallString $INSTDIR\uninstall.exe
     WriteRegDWORD HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" NoModify 1
     WriteRegDWORD HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" NoRepair 1
-    WriteRegStr HKCR "almex" "URL Protocol" ""
-    WriteRegStr HKCR "almex" "" "URL:ALMEX"
-    WriteRegStr HKCR "almex\DefaultIcon" "" $INSTDIR\almex-qt.exe
-    WriteRegStr HKCR "almex\shell\open\command" "" '"$INSTDIR\almex-qt.exe" "%1"'
+    WriteRegStr HKCR "KALMEX" "URL Protocol" ""
+    WriteRegStr HKCR "KALMEX" "" "URL:KALMEX"
+    WriteRegStr HKCR "KALMEX\DefaultIcon" "" $INSTDIR\KALMEX-qt.exe
+    WriteRegStr HKCR "KALMEX\shell\open\command" "" '"$INSTDIR\KALMEX-qt.exe" "%1"'
 SectionEnd
 
 # Macro for selecting uninstaller sections
@@ -127,7 +127,7 @@ done${UNSECTION_ID}:
 
 # Uninstaller sections
 Section /o -un.Main UNSEC0000
-    Delete /REBOOTOK $INSTDIR\almex-qt.exe
+    Delete /REBOOTOK $INSTDIR\KALMEX-qt.exe
     Delete /REBOOTOK $INSTDIR\COPYING.txt
     Delete /REBOOTOK $INSTDIR\readme.txt
     RMDir /r /REBOOTOK $INSTDIR\daemon
@@ -139,7 +139,7 @@ Section -un.post UNSEC0001
     DeleteRegKey HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)"
     Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\Uninstall $(^Name).lnk"
     Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\$(^Name).lnk"
-    Delete /REBOOTOK "$SMSTARTUP\ALMEX.lnk"
+    Delete /REBOOTOK "$SMSTARTUP\KALMEX.lnk"
     Delete /REBOOTOK $INSTDIR\uninstall.exe
     Delete /REBOOTOK $INSTDIR\debug.log
     Delete /REBOOTOK $INSTDIR\db.log
@@ -147,7 +147,7 @@ Section -un.post UNSEC0001
     DeleteRegValue HKCU "${REGKEY}" Path
     DeleteRegKey /IfEmpty HKCU "${REGKEY}\Components"
     DeleteRegKey /IfEmpty HKCU "${REGKEY}"
-    DeleteRegKey HKCR "almex"
+    DeleteRegKey HKCR "KALMEX"
     RmDir /REBOOTOK $SMPROGRAMS\$StartMenuGroup
     RmDir /REBOOTOK $INSTDIR
     Push $R0

@@ -9,8 +9,8 @@
 #include <vector>
 
 /**
- * CBaseChainParams defines the base parameters (shared between almex-cli and almexd)
- * of a given instance of the ALMEX system.
+ * CBaseChainParams defines the base parameters (shared between KALMEX-cli and KALMEXd)
+ * of a given instance of the KALMEX system.
  */
 class CBaseChainParams
 {

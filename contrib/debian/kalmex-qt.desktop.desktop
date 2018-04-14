@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=KALMEX
+Comment=KALMEX P2P Cryptocurrency
+Exec=KALMEX-qt %u
+Terminal=false
+Type=Application
+Icon=KALMEX128
+MimeType=x-scheme-handler/KALMEX;
+Categories=Office;Finance;
+Name[en_US]=KALMEX-qt.desktop

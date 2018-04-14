@@ -1,0 +1,26 @@
+# /etc/conf.d/KALMEXd: config file for /etc/init.d/KALMEXd
+
+# Config file location
+#BITCOIND_CONFIGFILE="/etc/KALMEX/KALMEX.conf"
+
+# What directory to write pidfile to?  (created and owned by $BITCOIND_USER)
+#BITCOIND_PIDDIR="/var/run/KALMEXd"
+
+# What filename to give the pidfile
+#BITCOIND_PIDFILE="${BITCOIND_PIDDIR}/KALMEXd.pid"
+
+# Where to write KALMEXd data (be mindful that the blockchain is large)
+#BITCOIND_DATADIR="/var/lib/KALMEXd"
+
+# User and group to own KALMEXd process
+#BITCOIND_USER="KALMEX"
+#BITCOIND_GROUP="KALMEX"
+
+# Path to KALMEXd executable
+#BITCOIND_BIN="/usr/bin/KALMEXd"
+
+# Nice value to run KALMEXd under
+#BITCOIND_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+BITCOIND_OPTS=""

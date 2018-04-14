@@ -44,7 +44,7 @@ public:
         DatabaseCache,       // int
         SpendZeroConfChange, // bool
         DarksendRounds,   // int
-        AnonymizeALMEXAmount, //int
+        AnonymizeKALMEXAmount, //int
         ShowMasternodesTab,  // bool
         Listen,              // bool
         OptionIDRowCount,
@@ -90,7 +90,7 @@ private:
 signals:
     void displayUnitChanged(int unit);
     void DarksendRoundsChanged(int);
-    void anonymizeALMEXAmountChanged(int);
+    void anonymizeKALMEXAmountChanged(int);
     void coinControlFeaturesChanged(bool);
 };
 

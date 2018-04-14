@@ -1,0 +1,20 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource prefix="/translations">
+        <file alias="bg">locale/KALMEX_bg.qm</file>
+        <file alias="de">locale/KALMEX_de.qm</file>
+        <file alias="en">locale/KALMEX_en.qm</file>
+        <file alias="es">locale/KALMEX_es.qm</file>
+        <file alias="fi">locale/KALMEX_fi.qm</file>
+        <file alias="fr">locale/KALMEX_fr.qm</file>
+        <file alias="it">locale/KALMEX_it.qm</file>
+        <file alias="ja">locale/KALMEX_ja.qm</file>
+        <file alias="pl">locale/KALMEX_pl.qm</file>
+        <file alias="pt">locale/KALMEX_pt.qm</file>
+        <file alias="ru">locale/KALMEX_ru.qm</file>
+        <file alias="sk">locale/KALMEX_sk.qm</file>
+        <file alias="sv">locale/KALMEX_sv.qm</file>
+        <file alias="vi">locale/KALMEX_vi.qm</file>
+        <file alias="zh_CN">locale/KALMEX_zh_CN.qm</file>
+        <file alias="zh_TW">locale/KALMEX_zh_TW.qm</file>
+    </qresource>
+</RCC>

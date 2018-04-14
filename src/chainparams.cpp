@@ -2,7 +2,7 @@
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
 // Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2018 The Almex developers
+// Copyright (c) 2018 The KALMEX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -115,7 +115,7 @@ public:
         nModifierUpdateBlock = 1; // we use the version 2 for dmd
         nMaxMoneyOut = 21000000 * COIN;
 
-        const char* pszTimestamp = "Almex cryptocurrency key";
+        const char* pszTimestamp = "KALMEX cryptocurrency key";
         CMutableTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
@@ -137,8 +137,8 @@ public:
         assert(genesis.hashMerkleRoot == uint256("0xc966c2a9eb205e39aa5367304738ed772cf54cd2dbbd6c830179e593e78f6663"));
         
 
-        vSeeds.push_back(CDNSSeedData("seed1.almex.team", "seed1.almex.team"));
-        vSeeds.push_back(CDNSSeedData("seed2.almex.team", "seed2.almex.team"));
+        vSeeds.push_back(CDNSSeedData("seed1.KALMEX.team", "seed1.KALMEX.team"));
+        vSeeds.push_back(CDNSSeedData("seed2.KALMEX.team", "seed2.KALMEX.team"));
         //vFixedSeeds.clear();
         //vSeeds.clear();
 
@@ -217,11 +217,11 @@ public:
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 83);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 18);
         base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 193);
-        // Testnet Almex BIP32 pubkeys start with 'DRKV'
+        // Testnet KALMEX BIP32 pubkeys start with 'DRKV'
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x3a)(0x80)(0x61)(0xa0).convert_to_container<std::vector<unsigned char> >();
-        // Testnet Almex BIP32 prvkeys start with 'DRKP'
+        // Testnet KALMEX BIP32 prvkeys start with 'DRKP'
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x3a)(0x80)(0x58)(0x37).convert_to_container<std::vector<unsigned char> >();
-        // Testnet Almex BIP44 coin type is '1' (All coin's testnet default)
+        // Testnet KALMEX BIP44 coin type is '1' (All coin's testnet default)
         base58Prefixes[EXT_COIN_TYPE] = boost::assign::list_of(0x80)(0x00)(0x00)(0x01).convert_to_container<std::vector<unsigned char> >();
 
         convertSeed6(vFixedSeeds, pnSeed6_test, ARRAYLEN(pnSeed6_test));

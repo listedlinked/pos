@@ -17,7 +17,7 @@ osx=true
 SIGNER=
 VERSION=
 commit=false
-url=https://github.com/ALMEX/ALMEX
+url=https://github.com/listedlinked/pos
 proc=2
 mem=2000
 lxc=true
@@ -31,7 +31,7 @@ commitFiles=true
 read -d '' usage <<- EOF
 Usage: $scriptName [-c|u|v|b|s|B|o|h|j|m|] signer version
 
-Run this script from the directory containing the almex, gitian-builder, gitian.sigs, and almex-detached-sigs.
+Run this script from the directory containing the KALMEX, gitian-builder, gitian.sigs, and KALMEX-detached-sigs.
 
 Arguments:
 signer          GPG signer to sign each build assert file
@@ -39,7 +39,7 @@ version		Version number, commit, or branch to build. If building a commit or bra
 
 Options:
 -c|--commit	Indicate that the version argument is for a commit or branch
--u|--url	Specify the URL of the repository. Default is https://github.com/ALMEX/ALMEX
+-u|--url	Specify the URL of the repository. Default is https://github.com/listedlinked/pos
 -v|--verify 	Verify the gitian build
 -b|--build	Do a gitian build
 -s|--sign	Make signed binaries for Windows and Mac OSX
@@ -232,8 +232,8 @@ echo ${COMMIT}
 if [[ $setup = true ]]
 then
     sudo apt-get install ruby apache2 git apt-cacher-ng python-vm-builder qemu-kvm qemu-utils
-    git clone https://github.com/ALMEX/ALMEX.SIGS.git
-    git clone https://github.com/ALMEX-DETACHED.SIGS.git
+    git clone https://github.com/listedlinked/pos.SIGS.git
+    git clone https://github.com/KALMEX-DETACHED.SIGS.git
     git clone https://github.com/devrandom/gitian-builder.git
     pushd ./gitian-builder
     if [[ -n "$USE_LXC" ]]
@@ -247,7 +247,7 @@ then
 fi
 
 # Set up build
-pushd ./almex
+pushd ./KALMEX
 git fetch
 git checkout ${COMMIT}
 popd
@@ -256,7 +256,7 @@ popd
 if [[ $build = true ]]
 then
 	# Make output folder
-	mkdir -p ./almex-binaries/${VERSION}
+	mkdir -p ./KALMEX-binaries/${VERSION}
 
 	# Build Dependencies
 	echo ""
@@ -266,7 +266,7 @@ then
 	mkdir -p inputs
 	wget -N -P inputs $osslPatchUrl
 	wget -N -P inputs $osslTarUrl
-	make -C ../almex/depends download SOURCES_PATH=`pwd`/cache/common
+	make -C ../KALMEX/depends download SOURCES_PATH=`pwd`/cache/common
 
 	# Linux
 	if [[ $linux = true ]]
@@ -274,9 +274,9 @@ then
             echo ""
 	    echo "Compiling ${VERSION} Linux"
 	    echo ""
-	    ./bin/gbuild -j ${proc} -m ${mem} --commit almex=${COMMIT} --url almex=${url} ../almex/contrib/gitian-descriptors/gitian-linux.yml
-	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../almex/contrib/gitian-descriptors/gitian-linux.yml
-	    mv build/out/almex-*.tar.gz build/out/src/almex-*.tar.gz ../almex-binaries/${VERSION}
+	    ./bin/gbuild -j ${proc} -m ${mem} --commit KALMEX=${COMMIT} --url KALMEX=${url} ../KALMEX/contrib/gitian-descriptors/gitian-linux.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../KALMEX/contrib/gitian-descriptors/gitian-linux.yml
+	    mv build/out/KALMEX-*.tar.gz build/out/src/KALMEX-*.tar.gz ../KALMEX-binaries/${VERSION}
 	fi
 	# Windows
 	if [[ $windows = true ]]
@@ -284,10 +284,10 @@ then
 	    echo ""
 	    echo "Compiling ${VERSION} Windows"
 	    echo ""
-	    ./bin/gbuild -j ${proc} -m ${mem} --commit almex=${COMMIT} --url almex=${url} ../almex/contrib/gitian-descriptors/gitian-win.yml
-	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../almex/contrib/gitian-descriptors/gitian-win.yml
-	    mv build/out/almex-*-win-unsigned.tar.gz inputs/almex-win-unsigned.tar.gz
-	    mv build/out/almex-*.zip build/out/almex-*.exe ../almex-binaries/${VERSION}
+	    ./bin/gbuild -j ${proc} -m ${mem} --commit KALMEX=${COMMIT} --url KALMEX=${url} ../KALMEX/contrib/gitian-descriptors/gitian-win.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../KALMEX/contrib/gitian-descriptors/gitian-win.yml
+	    mv build/out/KALMEX-*-win-unsigned.tar.gz inputs/KALMEX-win-unsigned.tar.gz
+	    mv build/out/KALMEX-*.zip build/out/KALMEX-*.exe ../KALMEX-binaries/${VERSION}
 	fi
 	# Mac OSX
 	if [[ $osx = true ]]
@@ -295,10 +295,10 @@ then
 	    echo ""
 	    echo "Compiling ${VERSION} Mac OSX"
 	    echo ""
-	    ./bin/gbuild -j ${proc} -m ${mem} --commit almex=${COMMIT} --url almex=${url} ../almex/contrib/gitian-descriptors/gitian-osx.yml
-	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../almex/contrib/gitian-descriptors/gitian-osx.yml
-	    mv build/out/almex-*-osx-unsigned.tar.gz inputs/almex-osx-unsigned.tar.gz
-	    mv build/out/almex-*.tar.gz build/out/almex-*.dmg ../almex-binaries/${VERSION}
+	    ./bin/gbuild -j ${proc} -m ${mem} --commit KALMEX=${COMMIT} --url KALMEX=${url} ../KALMEX/contrib/gitian-descriptors/gitian-osx.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../KALMEX/contrib/gitian-descriptors/gitian-osx.yml
+	    mv build/out/KALMEX-*-osx-unsigned.tar.gz inputs/KALMEX-osx-unsigned.tar.gz
+	    mv build/out/KALMEX-*.tar.gz build/out/KALMEX-*.dmg ../KALMEX-binaries/${VERSION}
 	fi
 	popd
 
@@ -325,27 +325,27 @@ then
 	echo ""
 	echo "Verifying v${VERSION} Linux"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-linux ../almex/contrib/gitian-descriptors/gitian-linux.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-linux ../KALMEX/contrib/gitian-descriptors/gitian-linux.yml
 	# Windows
 	echo ""
 	echo "Verifying v${VERSION} Windows"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-unsigned ../almex/contrib/gitian-descriptors/gitian-win.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-unsigned ../KALMEX/contrib/gitian-descriptors/gitian-win.yml
 	# Mac OSX
 	echo ""
 	echo "Verifying v${VERSION} Mac OSX"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-unsigned ../almex/contrib/gitian-descriptors/gitian-osx.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-unsigned ../KALMEX/contrib/gitian-descriptors/gitian-osx.yml
 	# Signed Windows
 	echo ""
 	echo "Verifying v${VERSION} Signed Windows"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../almex/contrib/gitian-descriptors/gitian-osx-signer.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../KALMEX/contrib/gitian-descriptors/gitian-osx-signer.yml
 	# Signed Mac OSX
 	echo ""
 	echo "Verifying v${VERSION} Signed Mac OSX"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../almex/contrib/gitian-descriptors/gitian-osx-signer.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../KALMEX/contrib/gitian-descriptors/gitian-osx-signer.yml
 	popd
 fi
 
@@ -360,10 +360,10 @@ then
 	    echo ""
 	    echo "Signing ${VERSION} Windows"
 	    echo ""
-	    ./bin/gbuild -i --commit signature=${COMMIT} ../almex/contrib/gitian-descriptors/gitian-win-signer.yml
-	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../almex/contrib/gitian-descriptors/gitian-win-signer.yml
-	    mv build/out/almex-*win64-setup.exe ../almex-binaries/${VERSION}
-	    mv build/out/almex-*win32-setup.exe ../almex-binaries/${VERSION}
+	    ./bin/gbuild -i --commit signature=${COMMIT} ../KALMEX/contrib/gitian-descriptors/gitian-win-signer.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../KALMEX/contrib/gitian-descriptors/gitian-win-signer.yml
+	    mv build/out/KALMEX-*win64-setup.exe ../KALMEX-binaries/${VERSION}
+	    mv build/out/KALMEX-*win32-setup.exe ../KALMEX-binaries/${VERSION}
 	fi
 	# Sign Mac OSX
 	if [[ $osx = true ]]
@@ -371,9 +371,9 @@ then
 	    echo ""
 	    echo "Signing ${VERSION} Mac OSX"
 	    echo ""
-	    ./bin/gbuild -i --commit signature=${COMMIT} ../almex/contrib/gitian-descriptors/gitian-osx-signer.yml
-	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../almex/contrib/gitian-descriptors/gitian-osx-signer.yml
-	    mv build/out/almex-osx-signed.dmg ../almex-binaries/${VERSION}/almex-${VERSION}-osx.dmg
+	    ./bin/gbuild -i --commit signature=${COMMIT} ../KALMEX/contrib/gitian-descriptors/gitian-osx-signer.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../KALMEX/contrib/gitian-descriptors/gitian-osx-signer.yml
+	    mv build/out/KALMEX-osx-signed.dmg ../KALMEX-binaries/${VERSION}/KALMEX-${VERSION}-osx.dmg
 	fi
 	popd
 

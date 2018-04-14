@@ -64,15 +64,15 @@ bin_PROGRAMS =
 TESTS =
 
 if BUILD_BITCOIND
-  bin_PROGRAMS += almexd
+  bin_PROGRAMS += KALMEXd
 endif
 
 if BUILD_BITCOIN_UTILS
-  bin_PROGRAMS += almex-cli almex-tx
+  bin_PROGRAMS += KALMEX-cli KALMEX-tx
 endif
 
 .PHONY: FORCE
-# almex core #
+# KALMEX core #
 BITCOIN_CORE_H = \
   activemasternode.h \
   addrman.h \
@@ -180,7 +180,7 @@ obj/build.h: FORCE
 	  $(abs_top_srcdir)
 libbitcoin_util_a-clientversion.$(OBJEXT): obj/build.h
 
-# server: shared between almexd and almex-qt
+# server: shared between KALMEXd and KALMEX-qt
 libbitcoin_server_a_CPPFLAGS = $(BITCOIN_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(BOOST_CPPFLAGS)
 libbitcoin_server_a_SOURCES = \
   addrman.cpp \
@@ -224,7 +224,7 @@ libbitcoin_zmq_a_SOURCES = \
   zmq/zmqpublishnotifier.cpp
 endif
 
-# wallet: shared between almexd and almex-qt, but only linked
+# wallet: shared between KALMEXd and KALMEX-qt, but only linked
 # when wallet enabled
 
 libbitcoin_wallet_a_CFLAGS = -fPIC
@@ -295,7 +295,7 @@ univalue_libbitcoin_univalue_a_SOURCES = \
   univalue/univalue_escapes.h \
   univalue/univalue.h
 
-# common: shared between almexd, and almex-qt and non-server tools
+# common: shared between KALMEXd, and KALMEX-qt and non-server tools
 libbitcoin_common_a_CPPFLAGS = $(BITCOIN_INCLUDES)
 libbitcoin_common_a_SOURCES = \
   allocators.cpp \
@@ -351,7 +351,7 @@ libbitcoin_util_a_SOURCES += compat/glibc_compat.cpp
 libbitcoin_util_a_SOURCES += compat/glibcxx_compat.cpp
 endif
 
-# cli: shared between almex-cli and almex-qt
+# cli: shared between KALMEX-cli and KALMEX-qt
 libbitcoin_cli_a_CPPFLAGS = $(BITCOIN_INCLUDES)
 libbitcoin_cli_a_SOURCES = \
   rpcclient.cpp \
@@ -361,7 +361,7 @@ nodist_libbitcoin_util_a_SOURCES = $(srcdir)/obj/build.h
 #
 
 # bitcoind binary #
-almexd_LDADD = \
+KALMEXd_LDADD = \
   $(LIBBITCOIN_SERVER) \
   $(LIBBITCOIN_COMMON) \
   $(LIBBITCOIN_UNIVALUE) \
@@ -372,40 +372,40 @@ almexd_LDADD = \
   $(LIBSECP256K1)
 
 if ENABLE_ZMQ
-almexd_LDADD += $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
+KALMEXd_LDADD += $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
 endif
 
 if ENABLE_WALLET
-almexd_LDADD += libbitcoin_wallet.a
+KALMEXd_LDADD += libbitcoin_wallet.a
 endif
-almexd_SOURCES = almexd.cpp
+KALMEXd_SOURCES = KALMEXd.cpp
 #
 
 if TARGET_WINDOWS
-almexd_SOURCES += almexd-res.rc
+KALMEXd_SOURCES += KALMEXd-res.rc
 endif
 
-almexd_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS)
-almexd_CPPFLAGS = $(BITCOIN_INCLUDES)
-almexd_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+KALMEXd_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS)
+KALMEXd_CPPFLAGS = $(BITCOIN_INCLUDES)
+KALMEXd_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 
-# almex-cli binary #
-almex_cli_LDADD = \
+# KALMEX-cli binary #
+KALMEX_cli_LDADD = \
   $(LIBBITCOIN_CLI) \
   $(LIBBITCOIN_UTIL) \
   $(BOOST_LIBS) \
   $(SSL_LIBS) \
   $(CRYPTO_LIBS)
 
-almex_cli_SOURCES = \
-  almex-cli.cpp
+KALMEX_cli_SOURCES = \
+  KALMEX-cli.cpp
 
-almex_cli_CPPFLAGS = $(BITCOIN_INCLUDES)
+KALMEX_cli_CPPFLAGS = $(BITCOIN_INCLUDES)
 #
 
-# almex-tx binary #
-almex_tx_LDADD = \
+# KALMEX-tx binary #
+KALMEX_tx_LDADD = \
   $(LIBBITCOIN_UNIVALUE) \
   $(LIBBITCOIN_COMMON) \
   $(LIBBITCOIN_UTIL) \
@@ -414,15 +414,15 @@ almex_tx_LDADD = \
   $(BOOST_LIBS) \
   $(CRYPTO_LIBS)
 
-almex_tx_SOURCES = almex-tx.cpp
-almex_tx_CPPFLAGS = $(BITCOIN_INCLUDES)
+KALMEX_tx_SOURCES = KALMEX-tx.cpp
+KALMEX_tx_CPPFLAGS = $(BITCOIN_INCLUDES)
 #
-almex_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+KALMEX_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-almex_cli_SOURCES += almex-cli-res.rc
+KALMEX_cli_SOURCES += KALMEX-cli-res.rc
 endif
-almex_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+KALMEX_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if BUILD_BITCOIN_LIBS
 include_HEADERS = script/bitcoinconsensus.h

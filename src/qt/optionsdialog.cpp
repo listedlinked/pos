@@ -3,7 +3,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include "config/almex-config.h"
+#include "config/KALMEX-config.h"
 #endif
 
 #include "optionsdialog.h"
@@ -214,7 +214,7 @@ void OptionsDialog::setMapper()
 
     /* Darksend Rounds */
     mapper->addMapping(ui->DarksendRounds, OptionsModel::DarksendRounds);
-    mapper->addMapping(ui->anonymizeALMEX, OptionsModel::AnonymizeALMEXAmount);
+    mapper->addMapping(ui->anonymizeKALMEX, OptionsModel::AnonymizeKALMEXAmount);
     mapper->addMapping(ui->showMasternodesTab, OptionsModel::ShowMasternodesTab);
 }
 

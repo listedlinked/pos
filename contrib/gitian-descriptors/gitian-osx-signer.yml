@@ -1,5 +1,5 @@
 ---
-name: "almex-dmg-signer"
+name: "KALMEX-dmg-signer"
 suites:
 - "trusty"
 architectures:
@@ -7,10 +7,10 @@ architectures:
 packages:
 - "faketime"
 remotes:
-- "url": "https://github.com/ALMEX/ALMEX.SIGS.git"
+- "url": "https://github.com/listedlinked/pos.SIGS.git"
   "dir": "signature"
 files:
-- "almex-osx-unsigned.tar.gz"
+- "KALMEX-osx-unsigned.tar.gz"
 script: |
   WRAP_DIR=$HOME/wrapped
   mkdir -p ${WRAP_DIR}
@@ -27,11 +27,11 @@ script: |
     chmod +x ${WRAP_DIR}/${prog}
   done
 
-  UNSIGNED=almex-osx-unsigned.tar.gz
-  SIGNED=almex-osx-signed.dmg
+  UNSIGNED=KALMEX-osx-unsigned.tar.gz
+  SIGNED=KALMEX-osx-signed.dmg
 
   tar -xf ${UNSIGNED}
   OSX_VOLNAME="$(cat osx_volname)"
   ./detached-sig-apply.sh ${UNSIGNED} signature/osx
-  ${WRAP_DIR}/genisoimage -no-cache-inodes -D -l -probe -V "ALMEX-Qt" -no-pad -r -dir-mode 0755 -apple -o uncompressed.dmg signed-app
+  ${WRAP_DIR}/genisoimage -no-cache-inodes -D -l -probe -V "KALMEX-Qt" -no-pad -r -dir-mode 0755 -apple -o uncompressed.dmg signed-app
   ${WRAP_DIR}/dmg dmg uncompressed.dmg ${OUTDIR}/${SIGNED}

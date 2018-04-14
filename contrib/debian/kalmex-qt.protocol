@@ -1,0 +1,11 @@
+[Protocol]
+exec=KALMEX-qt '%u'
+protocol=KALMEX
+input=none
+output=none
+helper=true
+listing=
+reading=false
+writing=false
+makedir=false
+deleting=false

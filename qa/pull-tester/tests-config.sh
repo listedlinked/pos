@@ -3,7 +3,7 @@
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-BUILDDIR="/root/ALMEX"
+BUILDDIR="/root/KALMEX"
 EXEEXT=""
 
 # These will turn into comments if they were disabled when configuring.
@@ -11,6 +11,6 @@ ENABLE_WALLET=1
 ENABLE_UTILS=1
 ENABLE_BITCOIND=1
 
-REAL_BITCOIND="$BUILDDIR/src/almexd${EXEEXT}"
-REAL_BITCOINCLI="$BUILDDIR/src/almex-cli${EXEEXT}"
+REAL_BITCOIND="$BUILDDIR/src/KALMEXd${EXEEXT}"
+REAL_BITCOINCLI="$BUILDDIR/src/KALMEX-cli${EXEEXT}"
 
